@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      color: #333;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .card {
+      background: white;
+      margin: 40px auto;
+      padding: 30px 20px;
+      max-width: 420px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    h1 { color: #ff6b6b; font-size: 2.2em; }
+    h2 { font-size: 1.2em; margin-bottom: 20px; }
+    p { line-height: 1.6; }
+
+    button {
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    button:hover { background: #ff4757; }
+
+    input {
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #ddd;
+      width: 80%;
+      text-align: center;
+    }
+
+    .hidden { display: none; }
+    .footer { margin-top: 25px; font-size: 0.9em; color: #777; }
+    .emoji { font-size: 2em; }
+
+    /* LOVE JATUH */
+    .heart {
+      position: fixed;
+      top: -10px;
+      font-size: 16px;
+      animation: fall linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(100vh); opacity: 0; }
+    }
+
+    /* CAKE MINI */
+    .cake {
+      position: absolute;
+      bottom: -15px;
+      right: -10px;
+      font-size: 40px;
+      transform: rotate(-10deg);
+    }
+
+    .error { color: #ff4757; margin-top: 10px; }
+  </style>
+</head>
+
+<body>
+
+  <!-- LAGU -->
+  <audio id="lagu" loop>
+    <source src="lagu.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- PASSWORD -->
+  <div class="card" id="passwordCard">
+    <h1>🔐 Rahasia Nih</h1>
+    <p>Masukin password dulu 😆</p>
+    <input type="password" id="passwordInput" placeholder="Clue: tanggal jadian">
+    <br><br>
+    <button onclick="cekPassword()">Buka 🎁</button>
+    <div id="error" class="error hidden">Password salah 😝</div>
+  </div>
+
+  <!-- KONTEN -->
+  <div class="card hidden" id="contentCard">
+    <div class="cake">🎂</div>
+
+    <h1>🎉 Happy Birthday 🎉</h1>
+    <h2>Untuk pacar aku paling lucu 🤍</h2>
+
+    <div class="emoji">🎈🥳</div>
+
+    <p>
+      Selamat ulang tahun yaa 💕<br>
+      Semoga panjang umur, sehat selalu, makin ganteng,<br>
+      dan tetap sabar punya pacar kayak aku 😝
+    </p>
+
+    <button onclick="bukaSurprise()">Klik buat kejutan 🎁</button>
+
+    <p id="surprise" class="hidden">
+      Aku gak jago ngerangkai kata,<br>
+      tapi aku jago sayang sama kamu 🤍<br><br>
+      Makasih udah hadir di hidup aku,<br>
+      semoga aku bisa terus nemenin kamu 🥺❤️
+    </p>
+
+    <div class="footer">— Dari pacar kamu yang imut (katanya) 😌</div>
+  </div>
+
+  <script>
+    const PASSWORD = "260425"; // GANTI PASSWORD DI SINI
+
+    function cekPassword() {
+      if (passwordInput.value === PASSWORD) {
+        passwordCard.classList.add("hidden");
+        contentCard.classList.remove("hidden");
+      } else {
+        error.classList.remove("hidden");
+      }
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+
+    function bukaSurprise() {
+      lagu.play().catch(() => {});
+      surprise.classList.remove("hidden");
+
+      for (let i = 0; i < 20; i++) {
+        setTimeout(createHeart, i * 150);
+      }
+    }
+  </script>
+
+</body>
+</html>
